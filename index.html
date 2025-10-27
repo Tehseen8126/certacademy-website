@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certacademy - Professional Certification Training</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .cta-button.secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        /* Courses Section */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        /* Course Detail Modal */
+        .course-modal, .enroll-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2rem auto;
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 800px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .enroll-modal .modal-content {
+            max-width: 500px;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .course-detail-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .course-detail-header h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .course-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .curriculum-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .curriculum-list li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #667eea;
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #f8f9fa;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+        }
+
+        /* Enhanced Contact Section */
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            margin-top: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-header h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .contact-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .contact-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .contact-detail {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .contact-detail strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .ceo-highlight {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .business-hours {
+            list-style: none;
+            text-align: left;
+        }
+
+        .business-hours li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .business-hours li:last-child {
+            border-bottom: none;
+        }
+
+        .hours-day {
+            font-weight: bold;
+        }
+
+        .hours-time {
+            color: #ffd700;
+        }
+
+        /* Quick Contact Buttons */
+        .quick-contact {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #ffd700;
+            color: #333;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-2px);
+            background: #ffed4e;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .contact-card {
+                padding: 1.5rem;
+            }
+            
+            .quick-contact {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .quick-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo" onclick="scrollToTop()">Certa<span>cademy</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Advance Your Career with Professional Certifications</h1>
+            <p>Get industry-recognized certifications and boost your career prospects with our expert-led training programs</p>
+            <a href="#courses" class="cta-button">Explore Courses</a>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2>Our Certification Programs</h2>
+            <div class="courses-grid">
+                <!-- Project Management Courses -->
+                <div class="course-card" onclick="openCourseModal('pmp')">
+                    <h3>Project Management Professional (PMP)®</h3>
+                    <p>Master project management methodologies and prepare for the PMP certification exam.</p>
+                    <p><strong>Duration:</strong> 8 weeks</p>
+                    <p><strong>Level:</strong> Advanced</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('prince2')">
+                    <h3>PRINCE2® Foundation & Practitioner</h3>
+                    <p>Learn structured project management method used extensively by UK government.</p>
+                    <p><strong>Duration:</strong> 6 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('acp')">
+                    <h3>PMI-ACP® (Agile Certified Practitioner)</h3>
+                    <p>Validate your knowledge of agile principles and skills with agile techniques.</p>
+                    <p><strong>Duration:</strong> 7 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('pba')">
+                    <h3>PMI-PBA® (Professional in Business Analysis)</h3>
+                    <p>Highlight your expertise in business analysis and learn requirements management.</p>
+                    <p><strong>Duration:</strong> 8 weeks</p>
+                    <p><strong>Level:</strong> Advanced</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('rmp')">
+                    <h3>PMI-RMP® (Risk Management Professional)</h3>
+                    <p>Specialize in project risk management and enhance organizational resilience.</p>
+                    <p><strong>Duration:</strong> 6 weeks</p>
+                    <p><strong>Level:</strong> Advanced</p>
+                </div>
+
+                <!-- IT Service Management -->
+                <div class="course-card" onclick="openCourseModal('itil')">
+                    <h3>ITIL® 4 Foundation</h3>
+                    <p>Learn IT service management best practices and framework for delivering value.</p>
+                    <p><strong>Duration:</strong> 4 weeks</p>
+                    <p><strong>Level:</strong> Foundation</p>
+                </div>
+
+                <!-- Cybersecurity Courses -->
+                <div class="course-card" onclick="openCourseModal('cissp')">
+                    <h3>Certified Information Systems Security Professional (CISSP)</h3>
+                    <p>Advanced cybersecurity certification for security leaders and practitioners.</p>
+                    <p><strong>Duration:</strong> 12 weeks</p>
+                    <p><strong>Level:</strong> Expert</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('ceh')">
+                    <h3>Certified Ethical Hacker (CEH)</h3>
+                    <p>Learn ethical hacking methodologies and penetration testing techniques.</p>
+                    <p><strong>Duration:</strong> 10 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('cisa')">
+                    <h3>Certified Information Systems Auditor (CISA)</h3>
+                    <p>World-renowned certification for IS audit control, assurance and security professionals.</p>
+                    <p><strong>Duration:</strong> 10 weeks</p>
+                    <p><strong>Level:</strong> Advanced</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('cism')">
+                    <h3>Certified Information Security Manager (CISM)</h3>
+                    <p>Focus on information security management and governance.</p>
+                    <p><strong>Duration:</strong> 10 weeks</p>
+                    <p><strong>Level:</strong> Advanced</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('cgeit')">
+                    <h3>Certified in Governance of Enterprise IT (CGEIT)</h3>
+                    <p>Framework for enterprise IT governance and strategic management.</p>
+                    <p><strong>Duration:</strong> 8 weeks</p>
+                    <p><strong>Level:</strong> Expert</p>
+                </div>
+
+                <!-- Cloud & Networking -->
+                <div class="course-card" onclick="openCourseModal('aws')">
+                    <h3>Amazon Web Services (AWS) Solutions Architect</h3>
+                    <p>Learn cloud architecture and prepare for AWS certification exams.</p>
+                    <p><strong>Duration:</strong> 10 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('microsoft')">
+                    <h3>Microsoft Azure Administrator</h3>
+                    <p>Implement, manage and monitor Azure environment and services.</p>
+                    <p><strong>Duration:</strong> 9 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('vmware')">
+                    <h3>VMware Certified Professional</h3>
+                    <p>Virtualization and cloud infrastructure management with VMware technologies.</p>
+                    <p><strong>Duration:</strong> 8 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                </div>
+
+                <!-- Networking -->
+                <div class="course-card" onclick="openCourseModal('ccna')">
+                    <h3>Cisco Certified Network Associate (CCNA)</h3>
+                    <p>Foundation in networking concepts, IP services, security fundamentals.</p>
+                    <p><strong>Duration:</strong> 12 weeks</p>
+                    <p><strong>Level:</strong> Associate</p>
+                </div>
+                <div class="course-card" onclick="openCourseModal('ccnp')">
+                    <h3>Cisco Certified Network Professional (CCNP)</h3>
+                    <p>Advanced networking skills for planning, implementing and troubleshooting.</p>
+                    <p><strong>Duration:</strong> 16 weeks</p>
+                    <p><strong>Level:</strong> Professional</p>
+                </div>
+
+                <!-- CompTIA -->
+                <div class="course-card" onclick="openCourseModal('comptia')">
+                    <h3>CompTIA Security+</h3>
+                    <p>Foundation-level cybersecurity skills and best practices.</p>
+                    <p><strong>Duration:</strong> 6 weeks</p>
+                    <p><strong>Level:</strong> Foundation</p>
+                </div>
+
+                <!-- Security -->
+                <div class="course-card" onclick="openCourseModal('paloalto')">
+                    <h3>Palo Alto Networks Cybersecurity</h3>
+                    <p>Next-generation firewall technologies and network security.</p>
+                    <p><strong>Duration:</strong> 8 weeks</p>
+                    <p><strong>Level:</strong> Intermediate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Detail Modal -->
+    <div id="courseModal" class="course-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCourseModal()">&times;</span>
+            <div id="courseDetailContent">
+                <!-- Course details will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Enrollment Modal -->
+    <div id="enrollModal" class="enroll-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeEnrollModal()">&times;</span>
+            <div class="course-detail-header">
+                <h2 id="enrollCourseTitle">Enroll in Course</h2>
+                <p>Please provide your details to enroll</p>
+            </div>
+            <form id="enrollmentForm">
+                <div class="form-group">
+                    <label for="enrollName">Full Name *</label>
+                    <input type="text" id="enrollName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="enrollEmail">Email Address *</label>
+                    <input type="email" id="enrollEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="enrollPhone">Phone Number *</label>
+                    <input type="tel" id="enrollPhone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="enrollExperience">Current Experience Level</label>
+                    <select id="enrollExperience" name="experience">
+                        <option value="">Select Experience Level</option>
+                        <option value="beginner">Beginner (0-2 years)</option>
+                        <option value="intermediate">Intermediate (2-5 years)</option>
+                        <option value="advanced">Advanced (5+ years)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="enrollMessage">Additional Information</label>
+                    <textarea id="enrollMessage" name="message" placeholder="Tell us about your background and goals..."></textarea>
+                </div>
+                <input type="hidden" id="selectedCourse" name="course">
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit" class="cta-button">Submit Enrollment</button>
+                    <button type="button" class="cta-button secondary" onclick="closeEnrollModal()" style="margin-left: 1rem;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10,000+</h3>
+                    <p>Students Certified</p>
+                </div>
+                <div class="stat-item">
+                    <h3>95%</h3>
+                    <p>Pass Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Industry Experts</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Student Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Why Choose Certacademy?</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <h3>Expert Instructors</h3>
+                    <p>Learn from industry professionals with years of practical experience and teaching expertise.</p>
+                </div>
+                <div class="course-card">
+                    <h3>Flexible Learning</h3>
+                    <p>Study at your own pace with our online platform and access materials anytime, anywhere.</p>
+                </div>
+                <div class="course-card">
+                    <h3>Career Support</h3>
+                    <p>Get career guidance, resume reviews, and interview preparation to land your dream job.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>Success Stories</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Certacademy's PMP course helped me transition from team lead to project manager. The instructors were incredibly knowledgeable!"</p>
+                    <p><strong>- Sarah Johnson, Project Manager</strong></p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"The AWS certification program gave me the skills and confidence to advance my cloud career. Highly recommended!"</p>
+                    <p><strong>- Michael Chen, Cloud Architect</strong></p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Outstanding support throughout my CISSP journey. The study materials and mock exams were invaluable."</p>
+                    <p><strong>- Emily Rodriguez, Security Analyst</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get Started Today</h2>
+            <div class="contact-form">
+                <form id="generalContactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="course">Course Interest</label>
+                        <select id="course" name="course">
+                            <option value="">Select a course</option>
+                            <option value="pmp">Project Management Professional (PMP)</option>
+                            <option value="cissp">CISSP</option>
+                            <option value="aws">AWS Solutions Architect</option>
+                            <option value="data-analytics">Google Data Analytics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Enhanced Contact Information -->
+            <div class="contact-info">
+                <div class="contact-header">
+                    <h3><i class="fas fa-headset"></i> Get in Touch</h3>
+                    <p>Ready to transform your career? We're here to help you every step of the way</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4>Leadership</h4>
+                        <div class="contact-detail">
+                            <strong>CEO & Founder</strong>
+                            <div class="ceo-highlight">Tehseen Raza</div>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">Industry Expert with 15+ Years Experience</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h4>Call Us</h4>
+                        <div class="contact-detail">
+                            <strong>Primary Contact</strong>
+                            <div style="font-size: 1.3rem; font-weight: bold; color: #ffd700;">
+                                <i class="fas fa-mobile-alt"></i> +91 81268 36108
+                            </div>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Available 24/7 for Course Counseling</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4>Visit Us</h4>
+                        <div class="contact-detail">
+                            <strong>Head Office</strong>
+                            <div>
+                                <i class="fas fa-building"></i> 123, City Station Road<br>
+                                <i class="fas fa-city"></i> Bareilly, Uttar Pradesh 243001<br>
+                                <i class="fas fa-flag"></i> India
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Business Hours</h4>
+                        <div class="contact-detail">
+                            <ul class="business-hours">
+                                <li>
+                                    <span class="hours-day">Monday - Friday</span>
+                                    <span class="hours-time">9:00 AM - 6:00 PM</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Saturday</span>
+                                    <span class="hours-time">10:00 AM - 4:00 PM</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Sunday</span>
+                                    <span class="hours-time">Emergency Support Only</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Contact Buttons -->
+                <div class="quick-contact">
+                    <a href="tel:+918126836108" class="quick-btn">
+                        <i class="fas fa-phone"></i> Call Now
+                    </a>
+                    <a href="https://wa.me/918126836108" class="quick-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:contact@certacademy.com" class="quick-btn">
+                        <i class="fas fa-envelope"></i> Email Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Certacademy. All rights reserved.</p>
+            <p>Professional Certification Training | CEO: Tehseen Raza | +91 81268 36108</p>
+            <p>123, City Station Road, Bareilly, Uttar Pradesh 243001</p>
+            <div style="margin-top: 1rem;">
+                <a href="tel:+918126836108" style="color: #ffd700; text-decoration: none; margin: 0 1rem;">
+                    <i class="fas fa-phone"></i> Call Us
+                </a>
+                <a href="https://wa.me/918126836108" style="color: #ffd700; text-decoration: none; margin: 0 1rem;" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="mailto:contact@certacademy.com" style="color: #ffd700; text-decoration: none; margin: 0 1rem;">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Course data
+        const courses = {
+            'pmp': {
+                title: 'Project Management Professional (PMP)®',
+                description: 'The PMP is the gold standard for project management certification. Recognized and demanded by organizations worldwide, the PMP validates your competence to perform in the role of a project manager, leading and directing projects and teams.',
+                duration: '8 weeks',
+                level: 'Advanced',
+                price: '$1,299',
+                instructor: 'John Peterson, PMP, MBA',
+                modules: [
+                    'Project Management Fundamentals and Framework',
+                    'Project Integration Management',
+                    'Project Scope Management',
+                    'Project Schedule Management',
+                    'Project Cost Management',
+                    'Project Quality Management',
+                    'Project Resource Management',
+                    'Project Communication Management',
+                    'Project Risk Management',
+                    'Project Procurement Management',
+                    'Project Stakeholder Management',
+                    'Exam Preparation and Practice Tests'
+                ],
+                prerequisites: [
+                    '4-year degree',
+                    '36 months of project leadership experience',
+                    '35 hours of project management education'
+                ],
+                certification: 'PMI PMP Certification',
+                features: [
+                    '35 Contact Hours/PDUs',
+                    '6 Full-length Mock Exams',
+                    '1-year Access to Course Materials',
+                    'Instructor Support'
+                ]
+            },
+            'prince2': {
+                title: 'PRINCE2® Foundation & Practitioner',
+                description: 'PRINCE2 (Projects IN Controlled Environments) is a structured project management method and practitioner certification that provides a scalable and tailorable approach to managing projects of any size or complexity.',
+                duration: '6 weeks',
+                level: 'Intermediate',
+                price: '$1,099',
+                instructor: 'Sarah Williams, PRINCE2 Practitioner',
+                modules: [
+                    'PRINCE2 Principles and Themes',
+                    'Business Case Theme',
+                    'Organization Theme',
+                    'Quality Theme',
+                    'Plans Theme',
+                    'Risk Theme',
+                    'Change Theme',
+                    'Progress Theme',
+                    'Processes Overview',
+                    'Tailoring PRINCE2 to Project Environment'
+                ],
+                prerequisites: [
+                    'No formal prerequisites',
+                    'Basic project management knowledge recommended'
+                ],
+                certification: 'AXELOS PRINCE2 Foundation & Practitioner',
+                features: [
+                    'Official PRINCE2 Manual',
+                    'Foundation and Practitioner Exam Vouchers',
+                    'Practice Exams and Mock Tests',
+                    'Case Study Materials'
+                ]
+            },
+            'acp': {
+                title: 'PMI-ACP® (Agile Certified Practitioner)',
+                description: 'The PMI-ACP spans many approaches to agile such as Scrum, Kanban, Lean, extreme programming (XP) and test-driven development (TDD). It validates your knowledge of agile principles and your skill with agile techniques.',
+                duration: '7 weeks',
+                level: 'Intermediate',
+                price: '$1,199',
+                instructor: 'Mike Rodriguez, PMI-ACP, CSM',
+                modules: [
+                    'Agile Principles and Mindset',
+                    'Value-Driven Delivery',
+                    'Stakeholder Engagement',
+                    'Team Performance',
+                    'Adaptive Planning',
+                    'Problem Detection and Resolution',
+                    'Continuous Improvement',
+                    'Scrum Framework Deep Dive',
+                    'Kanban and Lean Principles',
+                    'XP and Test-Driven Development'
+                ],
+                prerequisites: [
+                    '2,000 hours of general project experience',
+                    '1,500 hours working on agile project teams',
+                    '21 contact hours of agile practices training'
+                ],
+                certification: 'PMI Agile Certified Practitioner (PMI-ACP)',
+                features: [
+                    '21 Contact Hours/PDUs',
+                    'Agile Practice Guide',
+                    'Simulation Exams',
+                    'Agile Tool Kit'
+                ]
+            },
+            'pba': {
+                title: 'PMI-PBA® (Professional in Business Analysis)',
+                description: 'The PMI-PBA highlights your expertise in business analysis and helps you stand out to employers and stakeholders. It demonstrates your ability to work effectively with stakeholders to define their business requirements.',
+                duration: '8 weeks',
+                level: 'Advanced',
+                price: '$1,349',
+                instructor: 'Dr. Emily Chen, PMI-PBA, CBAP',
+                modules: [
+                    'Business Analysis Planning and Monitoring',
+                    'Elicitation and Collaboration',
+                    'Requirements Life Cycle Management',
+                    'Strategy Analysis',
+                    'Requirements Analysis and Design Definition',
+                    'Solution Evaluation',
+                    'Stakeholder Analysis and Management',
+                    'Business Analysis Tools and Techniques'
+                ],
+                prerequisites: [
+                    'Bachelor\'s degree or global equivalent',
+                    '4,500 hours of business analysis experience',
+                    '35 contact hours of business analysis education'
+                ],
+                certification: 'PMI Professional in Business Analysis (PMI-PBA)',
+                features: [
+                    '35 Contact Hours/CDUs',
+                    'Business Analysis Practice Guide',
+                    'Requirements Documentation Templates',
+                    'Case Studies and Workshops'
+                ]
+            },
+            'rmp': {
+                title: 'PMI-RMP® (Risk Management Professional)',
+                description: 'The PMI-RMP certification recognizes demonstrated knowledge and expertise in assessing and identifying project risks along with preparing plans to mitigate threats and capitalize on opportunities.',
+                duration: '6 weeks',
+                level: 'Advanced',
+                price: '$1,199',
+                instructor: 'Robert Kim, PMI-RMP, CRISC',
+                modules: [
+                    'Risk Strategy and Planning',
+                    'Stakeholder Engagement in Risk Management',
+                    'Risk Process Facilitation',
+                    'Risk Monitoring and Reporting',
+                    'Perform Specialized Risk Analyses',
+                    'Risk Management Frameworks',
+                    'Quantitative Risk Analysis',
+                    'Risk Response Planning',
+                    'Emerging Risk Management Trends'
+                ],
+                prerequisites: [
+                    'Bachelor\'s degree or global equivalent',
+                    '3,000 hours of project risk management experience',
+                    '30 hours of project risk management education'
+                ],
+                certification: 'PMI Risk Management Professional (PMI-RMP)',
+                features: [
+                    '30 Contact Hours/PDUs',
+                    'Risk Management Practice Guide',
+                    'Risk Register Templates',
+                    'Monte Carlo Simulation Training'
+                ]
+            },
+            'itil': {
+                title: 'ITIL® 4 Foundation',
+                description: 'ITIL 4 provides the guidance organizations need to address new service management challenges and utilize the potential of modern technology. It is designed to ensure a flexible, coordinated and integrated system for the effective governance and management of IT-enabled services.',
+                duration: '4 weeks',
+                level: 'Foundation',
+                price: '$799',
+                instructor: 'David Thompson, ITIL 4 Managing Professional',
+                modules: [
+                    'ITIL 4 Framework and Key Concepts',
+                    'Four Dimensions of Service Management',
+                    'ITIL Service Value System',
+                    'Guiding Principles of ITIL 4',
+                    'Service Value Chain',
+                    'ITIL Management Practices',
+                    'Continual Improvement',
+                    'Service Desk and Incident Management'
+                ],
+                prerequisites: [
+                    'No formal prerequisites',
+                    'Basic IT service knowledge recommended'
+                ],
+                certification: 'AXELOS ITIL 4 Foundation',
+                features: [
+                    'Official ITIL 4 Study Guide',
+                    'Foundation Exam Voucher',
+                    'Practice Tests and Quizzes',
+                    'ITIL Process Templates'
+                ]
+            },
+            'cissp': {
+                title: 'Certified Information Systems Security Professional (CISSP)',
+                description: 'The CISSP is a globally recognized certification in the field of information security. This course prepares you for the CISSP exam while providing comprehensive knowledge across all eight domains of the (ISC)² CISSP Common Body of Knowledge (CBK).',
+                duration: '12 weeks',
+                level: 'Expert',
+                price: '$1,599',
+                instructor: 'Dr. Maria Rodriguez, CISSP, CISM',
+                modules: [
+                    'Security and Risk Management',
+                    'Asset Security',
+                    'Security Architecture and Engineering',
+                    'Communication and Network Security',
+                    'Identity and Access Management (IAM)',
+                    'Security Assessment and Testing',
+                    'Security Operations',
+                    'Software Development Security',
+                    'Exam Strategies and Practice'
+                ],
+                prerequisites: [
+                    '5 years of cumulative paid work experience',
+                    'Experience in 2 or more of the 8 CBK domains'
+                ],
+                certification: '(ISC)² CISSP Certification',
+                features: [
+                    'Official (ISC)² Student Guide',
+                    '1000+ Practice Questions',
+                    'Hands-on Lab Exercises',
+                    '1-year Access to Virtual Labs'
+                ]
+            },
+            'ceh': {
+                title: 'Certified Ethical Hacker (CEH)',
+                description: 'The CEH certification provides comprehensive ethical hacking and network security training. Learn to think and act like a hacker to better defend against cyber attacks and understand the latest vulnerabilities and countermeasures.',
+                duration: '10 weeks',
+                level: 'Intermediate',
+                price: '$1,499',
+                instructor: 'Alex Johnson, CEH, OSCP',
+                modules: [
+                    'Introduction to Ethical Hacking',
+                    'Footprinting and Reconnaissance',
+                    'Scanning Networks and Enumeration',
+                    'Vulnerability Analysis',
+                    'System Hacking and Malware Threats',
+                    'Sniffing and Social Engineering',
+                    'Denial-of-Service and Session Hijacking',
+                    'Web Application Penetration Testing',
+                    'Wireless Network Security',
+                    'Cloud Computing Security',
+                    'Cryptography and Penetration Testing'
+                ],
+                prerequisites: [
+                    '2 years of information security experience',
+                    'Basic networking knowledge',
+                    'Understanding of information security concepts'
+                ],
+                certification: 'EC-Council Certified Ethical Hacker (CEH)',
+                features: [
+                    'iLabs Access for Hands-on Practice',
+                    'Official CEH Study Materials',
+                    'Practice Exams and Cyber Ranges',
+                    'Hacking Tools and Methodologies'
+                ]
+            },
+            'cisa': {
+                title: 'Certified Information Systems Auditor (CISA)',
+                description: 'The CISA certification is world-renowned as the standard of achievement for those who audit, control, monitor and assess an organization\'s information technology and business systems.',
+                duration: '10 weeks',
+                level: 'Advanced',
+                price: '$1,399',
+                instructor: 'Jennifer Martinez, CISA, CISM',
+                modules: [
+                    'Information System Auditing Process',
+                    'Governance and Management of IT',
+                    'Information Systems Acquisition and Development',
+                    'Information Systems Operations and Business Resilience',
+                    'Protection of Information Assets',
+                    'Audit Planning and Methodology',
+                    'Risk Assessment and Control Monitoring',
+                    'Compliance and Regulatory Requirements'
+                ],
+                prerequisites: [
+                    '5 years of professional information systems auditing experience',
+                    'Waivers available for certain education and experience'
+                ],
+                certification: 'ISACA CISA Certification',
+                features: [
+                    'Official CISA Review Manual',
+                    'CISA Question Database',
+                    'Case Studies and Audit Programs',
+                    'Practice Exams and Simulations'
+                ]
+            },
+            'cism': {
+                title: 'Certified Information Security Manager (CISM)',
+                description: 'The CISM certification promotes international security practices and validates your expertise in managing, designing, and assessing an enterprise\'s information security program.',
+                duration: '10 weeks',
+                level: 'Advanced',
+                price: '$1,499',
+                instructor: 'Kevin Brown, CISM, CISSP',
+                modules: [
+                    'Information Security Governance',
+                    'Information Risk Management and Compliance',
+                    'Information Security Program Development and Management',
+                    'Information Security Incident Management',
+                    'Security Strategy and Architecture',
+                    'Security Metrics and Reporting',
+                    'Business Continuity and Disaster Recovery',
+                    'Security Awareness and Training'
+                ],
+                prerequisites: [
+                    '5 years of information security management experience',
+                    '3 years of general information security experience'
+                ],
+                certification: 'ISACA CISM Certification',
+                features: [
+                    'Official CISM Review Manual',
+                    'Management Case Studies',
+                    'Security Program Templates',
+                    'Practice Questions and Exams'
+                ]
+            },
+            'cgeit': {
+                title: 'Certified in Governance of Enterprise IT (CGEIT)',
+                description: 'The CGEIT certification recognizes your knowledge and application of enterprise IT governance principles and practices, enabling you to bring greater value to your organization.',
+                duration: '8 weeks',
+                level: 'Expert',
+                price: '$1,599',
+                instructor: 'Dr. Susan Wilson, CGEIT, CRISC',
+                modules: [
+                    'Framework for Enterprise IT Governance',
+                    'Strategic Management of IT Resources',
+                    'Benefits Realization and Performance Measurement',
+                    'Risk Optimization and Resource Management',
+                    'Stakeholder Engagement and Communication',
+                    'IT Governance Frameworks (COBIT, ITIL)',
+                    'Compliance and Regulatory Requirements',
+                    'IT Investment and Portfolio Management'
+                ],
+                prerequisites: [
+                    '5 years of experience managing IT governance framework',
+                    'Experience in at least 2 CGEIT domains'
+                ],
+                certification: 'ISACA CGEIT Certification',
+                features: [
+                    'Official CGEIT Review Manual',
+                    'Governance Framework Templates',
+                    'Case Studies and Best Practices',
+                    'Practice Exams and Self-Assessment'
+                ]
+            },
+            'aws': {
+                title: 'AWS Solutions Architect - Associate',
+                description: 'This course is designed to help you prepare for the AWS Certified Solutions Architect - Associate exam. You will learn how to design and deploy scalable, highly available, and fault-tolerant systems on AWS.',
+                duration: '10 weeks',
+                level: 'Intermediate',
+                price: '$999',
+                instructor: 'Alex Thompson, AWS Solutions Architect',
+                modules: [
+                    'AWS Fundamentals and Core Services',
+                    'Designing Highly Available Systems',
+                    'Cost-Effective Architectures',
+                    'Scalable and Elastic Applications',
+                    'Fault-Tolerant Systems',
+                    'Identity and Access Management',
+                    'Storage Solutions',
+                    'Database Services',
+                    'Networking and Content Delivery',
+                    'Security Best Practices',
+                    'Monitoring and Troubleshooting'
+                ],
+                prerequisites: [
+                    'Basic understanding of networking',
+                    'Familiarity with cloud computing concepts',
+                    '6 months of AWS experience recommended'
+                ],
+                certification: 'AWS Certified Solutions Architect - Associate',
+                features: [
+                    'Hands-on Labs with Real AWS Environment',
+                    'Practice Exams with Detailed Explanations',
+                    'Architecture Design Workshops',
+                    'Q&A Sessions with AWS Experts'
+                ]
+            },
+            'microsoft': {
+                title: 'Microsoft Azure Administrator',
+                description: 'This course teaches IT professionals how to manage their Azure subscriptions, secure identities, administer the infrastructure, configure virtual networking, connect Azure and on-premises sites, manage network traffic, implement storage solutions, create and scale virtual machines, implement web apps and containers, back up and share data, and monitor your solution.',
+                duration: '9 weeks',
+                level: 'Intermediate',
+                price: '$1,099',
+                instructor: 'Sarah Chen, Microsoft Certified Trainer',
+                modules: [
+                    'Azure Administration and Identity Management',
+                    'Implement and Manage Storage',
+                    'Deploy and Manage Azure Compute Resources',
+                    'Configure and Manage Virtual Networking',
+                    'Monitor and Maintain Azure Resources',
+                    'Implement and Manage Azure Governance',
+                    'Data Protection and Security',
+                    'Azure Monitoring and Insights'
+                ],
+                prerequisites: [
+                    'Basic understanding of networking',
+                    'Knowledge of operating systems',
+                    'Familiarity with virtualization concepts'
+                ],
+                certification: 'Microsoft Certified: Azure Administrator Associate',
+                features: [
+                    'Azure Free Credits for Labs',
+                    'Official Microsoft Learning Materials',
+                    'Practice Assessments',
+                    'Real-world Scenario Exercises'
+                ]
+            },
+            'vmware': {
+                title: 'VMware Certified Professional',
+                description: 'This course provides the knowledge and skills to deploy, manage, and optimize VMware vSphere environments. Learn to virtualize servers, storage, and networks to create a software-defined data center.',
+                duration: '8 weeks',
+                level: 'Intermediate',
+                price: '$1,299',
+                instructor: 'Michael Davis, VCP-DCV',
+                modules: [
+                    'vSphere Architecture and Components',
+                    'Installing and Configuring ESXi Hosts',
+                    'Deploying and Managing vCenter Server',
+                    'Configuring and Managing vSphere Networking',
+                    'Configuring and Managing vSphere Storage',
+                    'Virtual Machine Management',
+                    'Resource Management and Monitoring',
+                    'vSphere HA and DRS Clusters',
+                    'vSphere Update Manager'
+                ],
+                prerequisites: [
+                    'System administration experience on Linux or Windows',
+                    'Understanding of virtualization concepts',
+                    'Basic networking knowledge'
+                ],
+                certification: 'VMware Certified Professional - Data Center Virtualization',
+                features: [
+                    'Hands-on Lab Environment',
+                    'Official VMware Course Materials',
+                    'Practice Exams',
+                    'Troubleshooting Scenarios'
+                ]
+            },
+            'ccna': {
+                title: 'Cisco Certified Network Associate (CCNA)',
+                description: 'The CCNA certification validates your ability to install, configure, operate, and troubleshoot medium-size routed and switched networks, including implementation and verification of connections to remote sites in a WAN.',
+                duration: '12 weeks',
+                level: 'Associate',
+                price: '$1,199',
+                instructor: 'Robert Wilson, CCIE #32415',
+                modules: [
+                    'Network Fundamentals and Architecture',
+                    'IP Connectivity and Routing Protocols',
+                    'IP Services (DNS, DHCP, NTP)',
+                    'Security Fundamentals',
+                    'Automation and Programmability',
+                    'LAN Switching Technologies',
+                    'WAN Technologies',
+                    'Network Access and IP Services',
+                    'Network Programmability and Automation'
+                ],
+                prerequisites: [
+                    'Basic computer literacy',
+                    'Basic PC operating system navigation skills',
+                    'Basic Internet usage skills'
+                ],
+                certification: 'Cisco Certified Network Associate (CCNA)',
+                features: [
+                    'Cisco Packet Tracer Access',
+                    'Hands-on Lab Exercises',
+                    'Official Cisco Study Guide',
+                    'Practice Exams and Simulations'
+                ]
+            },
+            'ccnp': {
+                title: 'Cisco Certified Network Professional (CCNP)',
+                description: 'The CCNP Enterprise certification program prepares you for today\'s professional-level job roles in enterprise networking technologies. CCNP Enterprise now includes automation and programmability to help you scale your networking infrastructure.',
+                duration: '16 weeks',
+                level: 'Professional',
+                price: '$1,899',
+                instructor: 'James Anderson, CCIE #21876',
+                modules: [
+                    'Advanced Routing Technologies',
+                    'Enterprise Network Architecture',
+                    'Virtualization and Infrastructure',
+                    'Network Assurance and Security',
+                    'Automation and Programmability',
+                    'Dual-Stack Architecture (IPv4/IPv6)',
+                    'Network Security and Services',
+                    'SD-WAN and SD-Access',
+                    'Network Design and Troubleshooting'
+                ],
+                prerequisites: [
+                    'CCNA certification or equivalent knowledge',
+                    '1-3 years of enterprise networking experience'
+                ],
+                certification: 'Cisco Certified Network Professional (CCNP)',
+                features: [
+                    'Advanced Lab Environment',
+                    'Official CCNP Study Materials',
+                    'Real-world Case Studies',
+                    'Troubleshooting Workshops'
+                ]
+            },
+            'comptia': {
+                title: 'CompTIA Security+',
+                description: 'CompTIA Security+ is a global certification that validates the baseline skills necessary to perform core security functions and pursue an IT security career. It emphasizes hands-on practical skills.',
+                duration: '6 weeks',
+                level: 'Foundation',
+                price: '$899',
+                instructor: 'Lisa Garcia, Security+, CISSP',
+                modules: [
+                    'Threats, Attacks and Vulnerabilities',
+                    'Architecture and Design Principles',
+                    'Implementation of Secure Systems',
+                    'Operations and Incident Response',
+                    'Governance, Risk and Compliance',
+                    'Cryptography and PKI',
+                    'Identity and Access Management',
+                    'Network Security Concepts'
+                ],
+                prerequisites: [
+                    'CompTIA Network+ recommended',
+                    '2 years of IT administration experience',
+                    'Basic security knowledge'
+                ],
+                certification: 'CompTIA Security+',
+                features: [
+                    'Official CompTIA Study Guide',
+                    'Practice Exams and Performance Questions',
+                    'Hands-on Lab Simulations',
+                    'Security+ Exam Voucher'
+                ]
+            },
+            'paloalto': {
+                title: 'Palo Alto Networks Cybersecurity',
+                description: 'This course covers Palo Alto Networks Next-Generation Firewall technologies and provides the knowledge and expertise to design, deploy, configure, maintain, and troubleshoot most Palo Alto Networks Next-Generation Firewall implementations.',
+                duration: '8 weeks',
+                level: 'Intermediate',
+                price: '$1,399',
+                instructor: 'Daniel White, PCNSE',
+                modules: [
+                    'Palo Alto Networks Security Platform',
+                    'Initial Configuration and Management',
+                    'Interface Configuration and Security Policies',
+                    'Network Address Translation (NAT)',
+                    'App-ID and Content-ID Technologies',
+                    'User-ID and GlobalProtect',
+                    'Monitoring and Reporting',
+                    'High Availability and Troubleshooting',
+                    'Threat Prevention and WildFire'
+                ],
+                prerequisites: [
+                    'Basic networking knowledge',
+                    'Understanding of firewall concepts',
+                    'TCP/IP and routing protocol knowledge'
+                ],
+                certification: 'Palo Alto Networks Certified Network Security Engineer (PCNSE)',
+                features: [
+                    'Virtual Firewall Lab Access',
+                    'Official Palo Alto Networks Materials',
+                    'Real-world Configuration Scenarios',
+                    'Troubleshooting Exercises'
+                ]
+            }
+        };
+
+        // Modal functions
+        let currentCourseId = '';
+
+        function openCourseModal(courseId) {
+            const course = courses[courseId];
+            currentCourseId = courseId;
+            const modal = document.getElementById('courseModal');
+            const content = document.getElementById('courseDetailContent');
+            
+            content.innerHTML = `
+                <div class="course-detail-header">
+                    <h2>${course.title}</h2>
+                    <p>${course.description}</p>
+                </div>
+                
+                <div class="course-info-grid">
+                    <div class="info-card">
+                        <h4>Duration</h4>
+                        <p>${course.duration}</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Level</h4>
+                        <p>${course.level}</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Price</h4>
+                        <p>${course.price}</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Instructor</h4>
+                        <p>${course.instructor}</p>
+                    </div>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h3>Course Curriculum</h3>
+                    <ul class="curriculum-list">
+                        ${course.modules.map(module => `<li>${module}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h3>Prerequisites</h3>
+                    <ul class="curriculum-list">
+                        ${course.prerequisites.map(req => `<li>${req}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h3>What's Included</h3>
+                    <ul class="curriculum-list">
+                        ${course.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="cta-button" onclick="openEnrollModal('${courseId}')" style="margin-right: 1rem;">Enroll Now</button>
+                    <button class="cta-button secondary" onclick="closeCourseModal()">Close</button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCourseModal() {
+            document.getElementById('courseModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openEnrollModal(courseId) {
+            const course = courses[courseId];
+            document.getElementById('enrollCourseTitle').textContent = `Enroll in ${course.title}`;
+            document.getElementById('selectedCourse').value = courseId;
+            closeCourseModal();
+            document.getElementById('enrollModal').style.display = 'block';
+        }
+
+        function closeEnrollModal() {
+            document.getElementById('enrollModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const courseModal = document.getElementById('courseModal');
+            const enrollModal = document.getElementById('enrollModal');
+            
+            if (event.target === courseModal) {
+                closeCourseModal();
+            }
+            if (event.target === enrollModal) {
+                closeEnrollModal();
+            }
+        }
+
+        // Enrollment form handling
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('enrollName').value,
+                email: document.getElementById('enrollEmail').value,
+                phone: document.getElementById('enrollPhone').value,
+                experience: document.getElementById('enrollExperience').value,
+                message: document.getElementById('enrollMessage').value,
+                course: document.getElementById('selectedCourse').value
+            };
+
+            // Here you would typically send this data to your server
+            console.log('Enrollment Data:', formData);
+            
+            alert(`Thank you ${formData.name}! Your enrollment request for ${courses[formData.course].title} has been received. Our team will contact you at ${formData.email} within 24 hours.`);
+            
+            this.reset();
+            closeEnrollModal();
+        });
+
+        // General contact form handling
+        document.getElementById('generalContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will contact you soon.');
+            this.reset();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = '#667eea';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+
+        // Add click-to-call functionality
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                console.log('Phone number clicked:', this.href);
+            });
+        });
+
+        // Add WhatsApp click tracking
+        document.querySelectorAll('a[href*="whatsapp"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                console.log('WhatsApp clicked');
+            });
+        });
+    </script>
+</body>
+</html>
